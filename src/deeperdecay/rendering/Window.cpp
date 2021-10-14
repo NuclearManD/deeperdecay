@@ -8,7 +8,7 @@
 
 
 Window::Window() {
-    window = glfwCreateWindow(1024, 768, "Tutorial 01", NULL, NULL);
+    window = glfwCreateWindow(1024, 768, "Deeperdecay", NULL, NULL);
 
     if (window == nullptr) {
         log_printf("Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible.\n", ERROR);
