@@ -5,6 +5,9 @@
 #ifndef DEEPERDECAY_RENDERING_H
 #define DEEPERDECAY_RENDERING_H
 
+#include "Shader.h"
+
 int graphicsSystemPreinit();
+ShaderProgram* loadShader();
 
 #endif //DEEPERDECAY_RENDERING_H

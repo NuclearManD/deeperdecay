@@ -5,6 +5,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "Shader.h"
 
 
 int graphicsSystemPreinit() {
@@ -31,4 +32,19 @@ int graphicsSystemPreinit() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     return 0;
+}
+
+ShaderProgram* loadShader() {
+    Shader vertexShader("shaders/vertex.glsl", GL_VERTEX_SHADER);
+    if (!vertexShader) return nullptr;
+    Shader fragmentShader("shaders/fragment.glsl", GL_FRAGMENT_SHADER);
+    if (!fragmentShader) return nullptr;
+    ShaderProgram* shader = new ShaderProgram();
+    shader->attachShader(vertexShader);
+    shader->attachShader(fragmentShader);
+    shader->link();
+    shader->detachShader(vertexShader);
+    shader->detachShader(fragmentShader);
+
+    return shader;
 }
