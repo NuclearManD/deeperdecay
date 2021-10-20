@@ -89,3 +89,7 @@ int ShaderProgram::link() {
 void ShaderProgram::enable() {
     glUseProgram(programId);
 }
+
+GLuint ShaderProgram::getUniformId(const char* s) {
+    return glGetUniformLocation(programId, s);
+}

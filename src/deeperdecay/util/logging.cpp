@@ -44,12 +44,8 @@ static const char* log_level_to_cstr(int level) {
     }
 }
 
-void log_printf(const char* fmt, int level, ...) {
-    // This function can accept as many arguments as you give it after the first two.
-    // These two lines extract the arguments for us.
-    va_list argv;
-    va_start(argv, level);
 
+void log_vprintf(const char* fmt, int level, va_list argv) {
     if (level >= log_level) {
         // Only print something if the log level is high enough
 
@@ -62,5 +58,14 @@ void log_printf(const char* fmt, int level, ...) {
         // Finish with a newline
         printf("\n");
     }
+}
+
+
+void log_printf(const char* fmt, int level, ...) {
+    // This function can accept as many arguments as you give it after the first two.
+    // These two lines extract the arguments for us.
+    va_list argv;
+    va_start(argv, level);
+    log_vprintf(fmt, level, argv);
 }
 

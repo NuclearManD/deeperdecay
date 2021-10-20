@@ -36,6 +36,8 @@ public:
     int link();
     void enable();
 
+    GLuint getUniformId(const char *string);
+
 private:
     GLuint programId;
 
