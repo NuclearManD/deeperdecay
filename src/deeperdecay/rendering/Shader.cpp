@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <deeperdecay/rendering/textures/Texture.h>
 
 #include "Shader.h"
 #include "deeperdecay/util/logging.h"
@@ -84,6 +85,7 @@ int ShaderProgram::link() {
         glGetProgramInfoLog(programId, linkLogLen, nullptr, &ProgramErrorMessage[0]);
         printf("%s\n", &ProgramErrorMessage[0]);
     }
+    textureUniform = getUniformId("textureId");
     return 0;
 }
 
@@ -93,4 +95,11 @@ void ShaderProgram::enable() {
 
 GLuint ShaderProgram::getUniformId(const char* s) {
     return glGetUniformLocation(programId, s);
+}
+
+void ShaderProgram::setTextureSelected(Texture& texture) {
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture.getTextureId());
+    // Set our "textureId" shader uniform to use Texture Unit 0
+    glUniform1i(textureUniform, 0);
 }

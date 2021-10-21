@@ -8,6 +8,8 @@
 #include <stdbool.h>
 #include <GL/gl.h>
 
+#include "textures/Texture.h"
+
 
 class Shader {
 public:
@@ -38,9 +40,11 @@ public:
 
     GLuint getUniformId(const char *string);
 
+    void setTextureSelected(Texture &texture);
+
 private:
     GLuint programId;
-
+    GLuint textureUniform;
 };
 
 
