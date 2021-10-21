@@ -5,7 +5,6 @@ project(deeperdecay)
 find_package(OpenGL REQUIRED)
 
 if (WIN32)
-    #link_directories(lib)
 
     find_library( GLUT NAMES glut glut32 freeglut
         PATHS
@@ -24,10 +23,11 @@ if (WIN32)
     include_directories(${CMAKE_SOURCE_DIR}/lib)
     link_directories(${CMAKE_SOURCE_DIR}/lib)
 else ()
-    #find_package(GLUT REQUIRED)
-    #find_package(GLEW REQUIRED)
-    #find_package(glm CONFIG REQUIRED)
+    find_package(GLUT REQUIRED)
+    find_package(GLEW REQUIRED)
+    find_package(glm CONFIG REQUIRED)
     find_package(glfw3 CONFIG REQUIRED)
+
 endif (WIN32)
 set(ALL_LIBS
         ${OPENGL_LIBRARY}
@@ -42,7 +42,14 @@ add_executable(deeperdecay src/deeperdecay/main/main.cpp src/deeperdecay/renderi
 include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})
 include_directories(src)
 
-target_link_libraries(deeperdecay PRIVATE
+if (WIN32)
+    target_link_libraries(deeperdecay PRIVATE
+            ${OPENGL_LIBRARY} # filled by "find_package(OpenGL REQUIRED)"
+            ${GLFW_LIBRARY}
+            ${GLEW_LIBRARY} OpenGL::GL glfw3 glew32 glut)
+else ()
+    target_link_libraries(deeperdecay PRIVATE
         ${OPENGL_LIBRARY} # filled by "find_package(OpenGL REQUIRED)"
         ${GLFW_LIBRARY}
-        ${GLEW_LIBRARY} OpenGL::GL glfw3 glew32 glut)
+        ${GLEW_LIBRARY} OpenGL::GL glfw GLEW::GLEW GLUT::GLUT)
+endif()
