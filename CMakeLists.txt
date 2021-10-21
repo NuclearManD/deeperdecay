@@ -1,12 +1,34 @@
 cmake_minimum_required(VERSION 3.17)
 project(deeperdecay)
 
-find_package(OpenGL REQUIRED)
-find_package(GLUT REQUIRED)
-find_package(GLEW REQUIRED)
-find_package(glm CONFIG REQUIRED)
-find_package(glfw3 CONFIG REQUIRED)
 
+find_package(OpenGL REQUIRED)
+
+if (WIN32)
+    #link_directories(lib)
+
+    find_library( GLUT NAMES glut glut32 freeglut
+        PATHS
+        lib
+        ${OPENGL_LIBRARY_DIR}
+        ${GLUT_ROOT_PATH}/Release
+    )
+    find_library( GLEW NAMES glew32
+        PATHS
+        lib
+    )
+    find_library( GLFW NAMES glfw3
+        PATHS
+        lib
+    )
+    include_directories(${CMAKE_SOURCE_DIR}/lib)
+    link_directories(${CMAKE_SOURCE_DIR}/lib)
+else ()
+    #find_package(GLUT REQUIRED)
+    #find_package(GLEW REQUIRED)
+    #find_package(glm CONFIG REQUIRED)
+    find_package(glfw3 CONFIG REQUIRED)
+endif (WIN32)
 set(ALL_LIBS
         ${OPENGL_LIBRARY}
         glfw
@@ -23,4 +45,4 @@ include_directories(src)
 target_link_libraries(deeperdecay PRIVATE
         ${OPENGL_LIBRARY} # filled by "find_package(OpenGL REQUIRED)"
         ${GLFW_LIBRARY}
-        ${GLEW_LIBRARY} OpenGL::GL glfw glm GLEW::GLEW GLUT::GLUT)
+        ${GLEW_LIBRARY} OpenGL::GL glfw3 glew32 glut)

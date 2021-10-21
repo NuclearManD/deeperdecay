@@ -85,8 +85,8 @@ int ShaderProgram::link() {
         glGetProgramInfoLog(programId, linkLogLen, nullptr, &ProgramErrorMessage[0]);
         printf("%s\n", &ProgramErrorMessage[0]);
     }
-
     textureUniform = getUniformId("textureId");
+    return 0;
 }
 
 void ShaderProgram::enable() {

@@ -50,10 +50,10 @@ void log_vprintf(const char* fmt, int level, va_list argv) {
         // Only print something if the log level is high enough
 
         // This will print the unix time, then the log level in brackets (as a string)
-        dprintf(log_fd, " %.3f [%.8s] ", unixtime(), log_level_to_cstr(level));
+        printf(" %.3f [%.8s] ", unixtime(), log_level_to_cstr(level));
 
         // Print the formatted message
-        vdprintf(log_fd, fmt, argv);
+        vprintf(fmt, argv);
 
         // Finish with a newline
         printf("\n");

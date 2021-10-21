@@ -2,12 +2,15 @@
 // Created by nuclaer on 10/15/21.
 //
 
+#include <fstream>
+#include <iostream>
+
 #include <fcntl.h>
-#include <unistd.h>
 
 #include "Texture.h"
 #include "deeperdecay/util/strutil.h"
 #include "deeperdecay/util/logging.h"
+using namespace std;
 
 
 class TextureBMP: public Texture {
@@ -23,28 +26,31 @@ public:
 
         // Open the file.  The int 'fd' means 'file descriptor'.  It's just a file ID
         // that we can use with C functions to identify our file.
-        int fd = open(path, O_RDONLY);
-        if (fd < 0) {
+        ifstream fd;
+        if (fd.fail()) {
             log_error("Image %s could not be opened\n", path);
             didLoad = false;
             return;
         }
 
-        // Read the BMP file header.
+        // Read zthe BMP file header.
         // If not 54 bytes read then some of the header is missing,
         // indicating an invalid file.
-        if (read(fd, header, 54) != 54) {
+        fd.seekg(0, fd.end);
+        if (fd.tellg() <= 54) {
             log_error("Image %s is not a valid BMP file (too short)\n", path);
             didLoad = false;
-            close(fd);
+            fd.close();
             return;
         }
+        fd.seekg(0, fd.beg);
+        fd.read((char*)header, 54);
 
         // Check that the first two bytes match the expected values
         if (header[0]!='B' || header[1]!='M') {
             log_error("Image %s is not a valid BMP file (bad start bytes)\n", path);
             didLoad = false;
-            close(fd);
+            fd.close();
             return;
         }
 
@@ -63,15 +69,16 @@ public:
         data = new unsigned char [imageSize];
 
         // Read the actual data from the file into the buffer
-        if (read(fd, data, imageSize) < imageSize) {
+        fd.read((char*)data, imageSize);
+        if (!fd) {
             log_error("Image %s is not a valid BMP file (EOF in color data)\n", path);
             didLoad = false;
-            close(fd);
+            fd.close();
             return;
         }
 
         //Everything is in memory now, the file can be closed
-        close(fd);
+        fd.close();
 
         // Create one OpenGL texture
         glGenTextures(1, &textureId);
