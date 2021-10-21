@@ -12,11 +12,11 @@ uint64_t micros() {
     struct timespec tms;
 
     // Use C++11 timespec_get if available, or clock_gettime otherwise.
-#if __cplusplus >= 201103L
+//#if __cplusplus >= 201103L
     if (! timespec_get(&tms, TIME_UTC)) {
-#else
-    if (clock_gettime(CLOCK_REALTIME,&tms)) {
-#endif
+//#else
+    //if (clock_gettime(CLOCK_REALTIME,&tms)) {
+//#endif
         return -1;
     }
 

@@ -84,6 +84,7 @@ int ShaderProgram::link() {
         glGetProgramInfoLog(programId, linkLogLen, nullptr, &ProgramErrorMessage[0]);
         printf("%s\n", &ProgramErrorMessage[0]);
     }
+    return 0;
 }
 
 void ShaderProgram::enable() {
