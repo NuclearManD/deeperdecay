@@ -11,5 +11,5 @@ uniform sampler2D textureId;
 
 void main(){
     // Output color = color of the texture at the specified position
-    color = texture(textureId, texturePos).rgb;
+    color = vec3(0.5, 0.5, 0.5);//texture(textureId, texturePos).rgb;
 }
