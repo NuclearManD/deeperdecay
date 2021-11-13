@@ -56,6 +56,8 @@ static GLuint getSquareVAO() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
+    is_loaded = true;
+
     return VertexArrayID;
 }
 
@@ -72,21 +74,6 @@ static void drawVAO(GLuint id, int size) {
 }
 
 
-void drawRectangle(float x1, float y1, float x2, float y2, float z) {
-    // I'm not using VBOs/VAOs here because rectangles don't take up much data, and
-    // the coordinates will likely change every time anyway.
-    // In short - I don't think VBOs/VAOs would be a real improvement here.  Use them
-    // for larger meshes and (maybe) cubes/spheres.
-
-    glColor3f(1, 1, 1);
-    glBegin(GL_QUADS);
-    glVertex3f(x1, y2, z);
-    glTexCoord2f(0, 1);
-    glVertex3f(x1, y1, z);
-    glTexCoord2f(0, 0);
-    glVertex3f(x2, y1, z);
-    glTexCoord2f(1, 0);
-    glVertex3f(x2, y2, z);
-    glTexCoord2f(1, 1);
-    glEnd();
+void drawSquare() {
+    drawVAO(getSquareVAO(), 6);
 }

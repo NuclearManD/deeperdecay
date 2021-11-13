@@ -23,11 +23,21 @@ bool renderLoop(render_conf_t* renderConf) {
         // Enable our shader
         shader->enable();
         shader->setTextureSelected(texture);
-        drawRectangle(-0.5, -0.5, 0.5, 0.5, 0);
+        shader->setMeshPosition(0, 0, 0);
+        shader->setMeshScale(0.3f, 0.3f, 0.3f);
+        drawSquare();
+
+        shader->setMeshPosition(0.7f, 0.3f, 0.3f);
+        shader->setMeshScale(0.3f, 0.6f, 0.3f);
+        drawSquare();
+
+        shader->disable();
 
         // Swap buffers
         window.swapBuffers();
         glfwPollEvents();
     }
+
+    return true;
 }
 
