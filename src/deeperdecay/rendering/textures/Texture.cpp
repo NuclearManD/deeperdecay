@@ -26,7 +26,7 @@ public:
 
         // Open the file.  The int 'fd' means 'file descriptor'.  It's just a file ID
         // that we can use with C functions to identify our file.
-        ifstream fd;
+        ifstream fd(path, ios::in);
         if (fd.fail()) {
             log_error("Image %s could not be opened\n", path);
             didLoad = false;
@@ -38,7 +38,7 @@ public:
         // indicating an invalid file.
         fd.seekg(0, fd.end);
         if (fd.tellg() <= 54) {
-            log_error("Image %s is not a valid BMP file (too short)\n", path);
+            log_error("Image %s is not a valid BMP file (too short, %i bytes)\n", path, (int)fd.tellg());
             didLoad = false;
             fd.close();
             return;

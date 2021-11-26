@@ -86,11 +86,17 @@ int ShaderProgram::link() {
         printf("%s\n", &ProgramErrorMessage[0]);
     }
     textureUniform = getUniformId("textureId");
+    scaleUniform = getUniformId("scale");
+    positionUniform = getUniformId("position");
     return 0;
 }
 
 void ShaderProgram::enable() {
     glUseProgram(programId);
+}
+
+void ShaderProgram::disable() {
+    glUseProgram(0);
 }
 
 GLuint ShaderProgram::getUniformId(const char* s) {
@@ -102,4 +108,12 @@ void ShaderProgram::setTextureSelected(Texture& texture) {
     glBindTexture(GL_TEXTURE_2D, texture.getTextureId());
     // Set our "textureId" shader uniform to use Texture Unit 0
     glUniform1i(textureUniform, 0);
+}
+
+void ShaderProgram::setMeshPosition(float x, float y, float z) {
+    glUniform3f(positionUniform, x, y, z);
+}
+
+void ShaderProgram::setMeshScale(float x, float y, float z) {
+    glUniform3f(scaleUniform, x, y, z);
 }

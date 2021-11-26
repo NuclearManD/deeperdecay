@@ -37,14 +37,19 @@ public:
 
     int link();
     void enable();
+    void disable();
 
     GLuint getUniformId(const char *string);
 
     void setTextureSelected(Texture &texture);
+    void setMeshPosition(float x, float y, float z);
+    void setMeshScale(float x, float y, float z);
 
 private:
     GLuint programId;
     GLuint textureUniform;
+    GLuint scaleUniform;
+    GLuint positionUniform;
 };
 
 
