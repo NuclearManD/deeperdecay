@@ -5,20 +5,17 @@
 #ifndef DEEPERDECAY_GAMEOBJECT_H
 #define DEEPERDECAY_GAMEOBJECT_H
 
-#include "ObjectPart.h"
-#include "vmmlib/vector.hpp"
-
-using namespace vmml;
+#include "Position.h"
 
 
 class GameObject {
 public:
-	void update(double dt);
+	// Do nothing by default
+	void update(double dt) {}
 
-	ObjectPart* part;
 private:
-	vec3d position;
-
+	// It's a pointer so we can set it to null
+	Position* position;
 };
 
 
