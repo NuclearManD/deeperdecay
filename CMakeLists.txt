@@ -59,6 +59,7 @@ add_executable(deeperdecay
 		src/deeperdecay/util/strutil.h
 		src/deeperdecay/framework/GameObject.cpp
 		src/deeperdecay/framework/ObjectPart.cpp
+		src/deeperdecay/framework/FieldPoint.cpp
 )
 
 include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})
