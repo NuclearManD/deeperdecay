@@ -22,17 +22,17 @@ GameObject* ObjectIteratorByPosition::getNext() {
 
 	position++;
 	while (position < length) {
-		vec2d pos = objects[position].position.xy;
+		vec2d pos = objects[position]->position.xy;
 		if (pos[0] >= p1[0] &&
 			pos[1] >= p1[1] &&
 			pos[0] <= p2[0] &&
 			pos[1] <= p2[1])
-			return (last = &objects[position]);
+			return (last = objects[position]);
 	}
 	return nullptr;
 }
 
-std::vector<GameObject>* Level::posToChunk(vec2d point) {
+std::vector<GameObject*>* Level::posToChunk(vec2d point) {
 	int index = posToChunkIndex(point);
 	if (index == -1)
 		return nullptr;
@@ -45,7 +45,7 @@ bool Level::addGameObject(vec2d point, GameObject &gameObject) {
 		return false;
 
 	gameObject.position = Position(this, point);
-	chunks[index].push_back(gameObject);
+	chunks[index].push_back(&gameObject);
 	return true;
 }
 
@@ -61,16 +61,17 @@ ObjectIteratorByPosition Level::getObjectsIn(vec2d chunk_point, vec2d p1, vec2d 
 
 void Level::update(double dt) {
 	for (auto & chunk : chunks) {
-		for (GameObject& object : chunk) {
-			object.update(dt);
+		for (GameObject* object : chunk) {
+			object->update(dt);
 		}
 	}
 }
 
-void Level::render(Shader *shader) {
+void Level::render(ShaderProgram *shader) {
+	shader->setRenderOrigin(0, 0, 0);
 	for (auto & chunk : chunks) {
-		for (GameObject& object : chunk) {
-			object.render(shader);
+		for (GameObject* object : chunk) {
+			object->render(shader);
 		}
 	}
 }

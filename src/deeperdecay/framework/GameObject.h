@@ -6,15 +6,17 @@
 #define DEEPERDECAY_GAMEOBJECT_H
 
 #include "Position.h"
+#include <deeperdecay/rendering/Shader.h>
 
 
 class GameObject {
 public:
 	// Do nothing by default
-	void update(double dt) {}
-	void render(Shader *shader) {}
+	virtual void update(double dt) {}
 
-	Position position;
+	virtual void render(ShaderProgram *shader) {}
+
+	Position position = Position(nullptr, 0, 0);
 };
 
 

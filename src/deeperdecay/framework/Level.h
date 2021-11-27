@@ -17,7 +17,7 @@
 
 class ObjectIteratorByPosition {
 public:
-	ObjectIteratorByPosition(std::vector<GameObject>& objects, vec2d p1, vec2d p2) : objects(objects), p1(p1), p2(p2) {
+	ObjectIteratorByPosition(std::vector<GameObject*>& objects, vec2d p1, vec2d p2) : objects(objects), p1(p1), p2(p2) {
 		length = objects.size();
 		position = -1;
 		last = nullptr;
@@ -26,7 +26,7 @@ public:
 	GameObject* getNext();
 
 private:
-	std::vector<GameObject>& objects;
+	std::vector<GameObject*>& objects;
 	vec2d p1;
 	vec2d p2;
 
@@ -37,15 +37,18 @@ private:
 
 
 class Level {
-	void update(double dt);
-	void render(Shader* shader);
+public:
 
-	std::vector<GameObject>* posToChunk(vec2d point);
+	void update(double dt);
+
+	std::vector<GameObject*>* posToChunk(vec2d point);
 	bool addGameObject(vec2d point, GameObject& gameObject);
 	ObjectIteratorByPosition getObjectsIn(vec2d chunk_point, vec2d p1, vec2d p2);
 
+	void render(ShaderProgram* shader);
+
 private:
-	std::vector<GameObject> chunks[NUM_CHUNKS];
+	std::vector<GameObject*> chunks[NUM_CHUNKS];
 
 };
 

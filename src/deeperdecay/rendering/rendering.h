@@ -5,6 +5,7 @@
 #ifndef DEEPERDECAY_RENDERING_H
 #define DEEPERDECAY_RENDERING_H
 
+#include <deeperdecay/framework/Level.h>
 #include "Shader.h"
 #include "Window.h"
 
@@ -42,6 +43,7 @@ typedef struct {
     // It probably doesn't matter...
     ShaderProgram* shader;
     RenderState& renderState;
+    Level& universe;
 } render_conf_t;
 
 // We encoded the function arguments into a struct so we only have one

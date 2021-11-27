@@ -1,5 +1,7 @@
 #include <iostream>
 #include <deeperdecay/rendering/Window.h>
+#include <deeperdecay/framework/Level.h>
+#include <deeperdecay/objects/TestObject.h>
 
 #include "deeperdecay/util/logging.h"
 #include "deeperdecay/rendering/rendering.h"
@@ -24,11 +26,16 @@ int main() {
         return -1;
     }
 
+    Level level0;
+    TestObject object;
+    level0.addGameObject(vec2d(0, 0), object);
+
     RenderState renderState(window);
     render_conf_t renderConf = {
             window,
             shader,
-            renderState
+            renderState,
+			level0
     };
 
     renderLoop(&renderConf);

@@ -60,6 +60,7 @@ add_executable(deeperdecay
 		src/deeperdecay/framework/Position.cpp
 		src/deeperdecay/framework/FieldPoint.cpp
 		src/deeperdecay/framework/Level.cpp
+		src/deeperdecay/objects/TestObject.cpp
 )
 
 include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})

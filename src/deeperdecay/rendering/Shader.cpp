@@ -86,8 +86,10 @@ int ShaderProgram::link() {
         printf("%s\n", &ProgramErrorMessage[0]);
     }
     textureUniform = getUniformId("textureId");
-    scaleUniform = getUniformId("scale");
-    positionUniform = getUniformId("position");
+    scaleUniform = getUniformId("meshScale");
+	positionUniform = getUniformId("meshPosition");
+	originUniform = getUniformId("origin");
+	windowScaleUniform = getUniformId("windowScale");
     return 0;
 }
 
@@ -111,9 +113,17 @@ void ShaderProgram::setTextureSelected(Texture& texture) {
 }
 
 void ShaderProgram::setMeshPosition(float x, float y, float z) {
-    glUniform3f(positionUniform, x, y, z);
+	glUniform3f(positionUniform, x, y, z);
+}
+
+void ShaderProgram::setWindowScale(float scale) {
+	glUniform1f(windowScaleUniform, 1/scale);
 }
 
 void ShaderProgram::setMeshScale(float x, float y, float z) {
-    glUniform3f(scaleUniform, x, y, z);
+	glUniform3f(scaleUniform, x, y, z);
+}
+
+void ShaderProgram::setRenderOrigin(float x, float y, float z) {
+	glUniform3f(originUniform, x, y, z);
 }

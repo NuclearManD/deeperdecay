@@ -13,6 +13,7 @@ bool renderLoop(render_conf_t* renderConf) {
     RenderState& state = renderConf->renderState;
     Window& window = renderConf->window;
     ShaderProgram* shader = renderConf->shader;
+    auto& universe = renderConf->universe;
 
     Texture& texture = loadTexture("atom2.bmp");
 
@@ -20,17 +21,10 @@ bool renderLoop(render_conf_t* renderConf) {
         // Clear screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Enable our shader
+        // Render our level
         shader->enable();
-        shader->setTextureSelected(texture);
-        shader->setMeshPosition(0, 0, 0);
-        shader->setMeshScale(0.3f, 0.3f, 0.3f);
-        drawSquare();
-
-        shader->setMeshPosition(0.7f, 0.3f, 0.3f);
-        shader->setMeshScale(0.3f, 0.6f, 0.3f);
-        drawSquare();
-
+        shader->setWindowScale(10);
+		universe.render(shader);
         shader->disable();
 
         // Swap buffers
