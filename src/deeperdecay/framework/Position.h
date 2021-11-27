@@ -6,14 +6,16 @@
 #define DEEPERDECAY_POSITION_H
 
 #include "vmmlib/vector.hpp"
-#include "Level.h"
 
 using namespace vmml;
 
-
+class Level;
 class Position {
 public:
-	Level& level;
+	Position(Level* level, vec2d xy) : level(level), xy(xy) {}
+	Position(Level* level, double x, double y) : level(level), xy(x, y) {}
+
+	Level* level;
 	vec2d xy;
 };
 

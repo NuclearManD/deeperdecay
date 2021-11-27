@@ -13,9 +13,7 @@ public:
 	// Do nothing by default
 	void update(double dt) {}
 
-private:
-	// It's a pointer so we can set it to null
-	Position* position;
+	Position position;
 };
 
 
