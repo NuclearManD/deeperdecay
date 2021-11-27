@@ -7,6 +7,7 @@
 
 
 #include <vmmlib/vector.hpp>
+#include <deeperdecay/rendering/Shader.h>
 #include "GameObject.h"
 
 #define LEVEL_WIDTH_METERS 1024
@@ -37,6 +38,7 @@ private:
 
 class Level {
 	void update(double dt);
+	void render(Shader* shader);
 
 	std::vector<GameObject>* posToChunk(vec2d point);
 	bool addGameObject(vec2d point, GameObject& gameObject);

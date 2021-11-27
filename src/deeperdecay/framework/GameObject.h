@@ -12,6 +12,7 @@ class GameObject {
 public:
 	// Do nothing by default
 	void update(double dt) {}
+	void render(Shader *shader) {}
 
 	Position position;
 };

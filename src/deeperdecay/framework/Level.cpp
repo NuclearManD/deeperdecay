@@ -67,3 +67,11 @@ void Level::update(double dt) {
 	}
 }
 
+void Level::render(Shader *shader) {
+	for (auto & chunk : chunks) {
+		for (GameObject& object : chunk) {
+			object.render(shader);
+		}
+	}
+}
+
