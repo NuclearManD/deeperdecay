@@ -6,9 +6,8 @@
 #define DEEPERDECAY_SHADER_H
 
 #include <stdbool.h>
-#include <GL/gl.h>
-
 #include "textures/Texture.h"
+#include <GL/gl.h>
 
 
 class Shader {
@@ -44,12 +43,16 @@ public:
     void setTextureSelected(Texture &texture);
     void setMeshPosition(float x, float y, float z);
     void setMeshScale(float x, float y, float z);
+	void setRenderOrigin(float x, float y, float z);
+	void setWindowScale(float scale);
 
 private:
     GLuint programId;
     GLuint textureUniform;
     GLuint scaleUniform;
-    GLuint positionUniform;
+	GLuint positionUniform;
+	GLuint originUniform;
+	GLuint windowScaleUniform;
 };
 
 

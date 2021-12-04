@@ -37,7 +37,31 @@ set(ALL_LIBS
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(deeperdecay src/deeperdecay/main/main.cpp src/deeperdecay/rendering/Window.cpp src/deeperdecay/rendering/Window.h src/deeperdecay/rendering/initialization.cpp src/deeperdecay/rendering/rendering.h src/deeperdecay/util/logging.cpp src/deeperdecay/util/logging.h src/deeperdecay/util/timeutil.h src/deeperdecay/util/timeutil.cpp src/deeperdecay/rendering/Shader.cpp src/deeperdecay/rendering/Shader.h src/deeperdecay/rendering/textures/Texture.cpp src/deeperdecay/rendering/textures/Texture.h src/deeperdecay/util/strutil.cpp src/deeperdecay/util/strutil.h src/deeperdecay/rendering/renderloop.cpp src/deeperdecay/rendering/RenderState.cpp src/deeperdecay/rendering/primitives.h src/deeperdecay/rendering/primitives.cpp)
+add_executable(deeperdecay
+		src/deeperdecay/main/main.cpp
+		src/deeperdecay/rendering/Window.cpp
+		src/deeperdecay/rendering/Window.h
+		src/deeperdecay/rendering/initialization.cpp
+		src/deeperdecay/rendering/rendering.h
+		src/deeperdecay/rendering/Shader.cpp
+		src/deeperdecay/rendering/Shader.h
+		src/deeperdecay/rendering/textures/Texture.cpp
+		src/deeperdecay/rendering/textures/Texture.h
+		src/deeperdecay/rendering/renderloop.cpp
+		src/deeperdecay/rendering/RenderState.cpp
+		src/deeperdecay/rendering/primitives.h
+		src/deeperdecay/rendering/primitives.cpp
+		src/deeperdecay/util/logging.cpp
+		src/deeperdecay/util/logging.h
+		src/deeperdecay/util/timeutil.h
+		src/deeperdecay/util/timeutil.cpp
+		src/deeperdecay/util/strutil.cpp
+		src/deeperdecay/util/strutil.h
+		src/deeperdecay/framework/Position.cpp
+		src/deeperdecay/framework/FieldPoint.cpp
+		src/deeperdecay/framework/Level.cpp
+		src/deeperdecay/objects/TestObject.cpp
+)
 
 include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})
 include_directories(src)
