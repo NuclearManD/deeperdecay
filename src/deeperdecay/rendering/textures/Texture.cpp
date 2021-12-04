@@ -21,6 +21,7 @@ public:
         unsigned int dataPos;     // Position in the file where the actual data begins
         unsigned int width, height;
         unsigned int imageSize;   // = width*height*3
+        unsigned short pixel_bits;
         // Actual RGB data
         unsigned char * data;
 
@@ -60,10 +61,11 @@ public:
         imageSize  = *(int*)&(header[0x22]);
         width      = *(int*)&(header[0x12]);
         height     = *(int*)&(header[0x16]);
+        pixel_bits = *(short*)&(header[0x1C]);
 
         // Some BMP files are misformatted, guess missing information
-        if (imageSize==0)    imageSize=width*height*3; // 3 : one byte for each Red, Green and Blue component
-        if (dataPos==0)      dataPos=54; // The BMP header is done that way
+        if (imageSize==0)    imageSize = width*height*pixel_bits/8;
+        if (dataPos==0)      dataPos = 54; // The BMP header is done that way
 
         // Create a buffer
         data = new unsigned char [imageSize];
@@ -87,12 +89,20 @@ public:
         glBindTexture(GL_TEXTURE_2D, textureId);
 
         // Give the image to OpenGL
-        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        if (pixel_bits == 24)
+	        glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        else
+			glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
         // When MAGnifying the image (no bigger mipmap available), use LINEAR filtering
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        // When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		// When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+		// When MAGnifying the image (no bigger mipmap available), use LINEAR filtering
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		// When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         // Generate mipmaps, by the way.
         glGenerateMipmap(GL_TEXTURE_2D);
 
