@@ -62,7 +62,7 @@ add_executable(deeperdecay
 		src/deeperdecay/framework/Level.cpp
 		src/deeperdecay/objects/TestObject.cpp
 		src/deeperdecay/objects/Beaker.cpp
-)
+		src/deeperdecay/objects/FloorTile.cpp src/deeperdecay/objects/FloorTile.h)
 
 include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})
 include_directories(src)
