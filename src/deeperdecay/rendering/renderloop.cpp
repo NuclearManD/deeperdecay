@@ -4,6 +4,7 @@
 
 #include <stdbool.h>
 #include <deeperdecay/rendering/textures/Texture.h>
+#include <deeperdecay/util/timeutil.h>
 
 #include "rendering.h"
 #include "primitives.h"
@@ -16,6 +17,8 @@ bool renderLoop(render_conf_t* renderConf) {
     auto& universe = renderConf->universe;
 
     Texture& texture = loadTexture("atom2.bmp");
+
+    double last_time = unixtime();
 
     while (!state.shouldExit()) {
         // Clear screen
@@ -30,6 +33,11 @@ bool renderLoop(render_conf_t* renderConf) {
         // Swap buffers
         window.swapBuffers();
         glfwPollEvents();
+
+        // Later we'll move this to it's own thread, it really doesn't belong here
+        double time = unixtime();
+        universe.update(time - last_time);
+        last_time = time;
     }
 
     return true;
