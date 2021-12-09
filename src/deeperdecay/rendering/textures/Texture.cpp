@@ -4,8 +4,7 @@
 
 #include <fstream>
 #include <iostream>
-
-#include <fcntl.h>
+#include <unordered_map>
 
 #include "Texture.h"
 #include "deeperdecay/util/strutil.h"
@@ -131,14 +130,20 @@ private:
 
 static TextureInvalid invalid_texture{};
 
-Texture* tex;
+unordered_map<const char*, Texture*> loaded_textures;
+
 
 Texture& loadTexture(const char* path) {
+	if (loaded_textures.find(path) != loaded_textures.end())
+		return *loaded_textures[path];
+
     if (strendswith(path, ".bmp")) {
-        tex = new TextureBMP(path);
+		Texture* tex = new TextureBMP(path);
+		loaded_textures[path] = tex;
         return *tex;
     } else {
         log_error("Unable to load %s: Unrecognized file extension", path);
+		loaded_textures[path] = &invalid_texture;
         return invalid_texture;
     }
 }
