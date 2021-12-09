@@ -32,6 +32,9 @@ int graphicsSystemPreinit() {
     // We don't want the old OpenGL
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    // Enable alpha blending
+	glEnable(GL_BLEND);
+
     return 0;
 }
 
