@@ -71,6 +71,7 @@ public:
         data = new unsigned char [imageSize];
 
         // Read the actual data from the file into the buffer
+        fd.seekg(dataPos, fd.beg);
         fd.read((char*)data, imageSize);
         if (!fd) {
             log_error("Image %s is not a valid BMP file (EOF in color data)\n", path);
