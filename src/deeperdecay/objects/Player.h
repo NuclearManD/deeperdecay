@@ -13,7 +13,7 @@ class Player: public GameObject {
 public:
 	explicit Player(Window& window) : window(window) {
 
-		texture = &loadTexture("res/player.bmp");
+		texture = &loadTexture("res/textures/player.bmp");
 	}
 
 	void render(ShaderProgram *shader) override;

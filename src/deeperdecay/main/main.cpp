@@ -2,9 +2,8 @@
 #include <deeperdecay/rendering/Window.h>
 #include <deeperdecay/framework/Level.h>
 #include <deeperdecay/objects/TestObject.h>
-#include <deeperdecay/objects/Beaker.h>
-#include <deeperdecay/objects/FloorTile.h>
 #include <deeperdecay/objects/Player.h>
+#include <deeperdecay/loader/objectRegistry.h>
 
 #include "deeperdecay/util/logging.h"
 #include "deeperdecay/rendering/rendering.h"
@@ -29,16 +28,17 @@ int main() {
         return -1;
     }
 
+	loadObjects();
+
     Level level0;
-    Beaker object;
     Player player(window);
-    level0.addGameObject(vec2d(0, 0), object);
+    level0.addGameObject(vec2d(0, 0), *instantiateObjectById("beaker_100ml"));
     level0.addGameObject(vec2d(0, 0), player);
 
+	DynamicObjectDefinition* floorTileDefinition = getObjectDefinitionById("floortile0");
     for (int x = 1; x < 10; x++)
     	for (int y = 0; y < 10; y++) {
-    		FloorTile* tile = new FloorTile();
-			level0.addGameObject(vec2d(x, y), *tile);
+			level0.addGameObject(vec2d(x, y), *floorTileDefinition->instantiate());
 		}
 
     RenderState renderState(window);

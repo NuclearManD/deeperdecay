@@ -130,7 +130,7 @@ private:
 
 static TextureInvalid invalid_texture{};
 
-unordered_map<const char*, Texture*> loaded_textures;
+unordered_map<std::string, Texture*> loaded_textures;
 
 
 Texture& loadTexture(const char* path) {

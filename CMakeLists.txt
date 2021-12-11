@@ -61,8 +61,9 @@ add_executable(deeperdecay
 		src/deeperdecay/framework/FieldPoint.cpp
 		src/deeperdecay/framework/Level.cpp
 		src/deeperdecay/objects/TestObject.cpp
-		src/deeperdecay/objects/Beaker.cpp
-		src/deeperdecay/objects/FloorTile.cpp src/deeperdecay/objects/FloorTile.h src/deeperdecay/objects/Player.cpp src/deeperdecay/objects/Player.h)
+		src/deeperdecay/objects/Player.cpp
+		src/deeperdecay/objects/DynamicallyDefinedObject.cpp
+		src/deeperdecay/loader/objectRegistry.cpp)
 
 include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})
 include_directories(src)

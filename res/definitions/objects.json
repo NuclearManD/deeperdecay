@@ -1,0 +1,12 @@
+[
+  {
+	"name": "Floor Tile",
+	"id": "floortile0",
+	"texture": "res/textures/floor_tile.bmp"
+  },
+  {
+	"name": "100mL Beaker",
+	"id": "beaker_100ml",
+	"texture": "res/textures/beaker_small.bmp"
+  }
+]
