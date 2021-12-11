@@ -2,12 +2,10 @@
 // Created by nuclaer on 10/20/21.
 //
 
-#include <stdbool.h>
 #include <deeperdecay/rendering/textures/Texture.h>
 #include <deeperdecay/util/timeutil.h>
 
 #include "rendering.h"
-#include "primitives.h"
 
 
 bool renderLoop(render_conf_t* renderConf) {
@@ -15,8 +13,6 @@ bool renderLoop(render_conf_t* renderConf) {
     Window& window = renderConf->window;
     ShaderProgram* shader = renderConf->shader;
     auto& universe = renderConf->universe;
-
-    Texture& texture = loadTexture("atom2.bmp");
 
     double last_time = unixtime();
 
