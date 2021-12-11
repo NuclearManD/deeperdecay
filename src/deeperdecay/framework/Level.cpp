@@ -68,7 +68,7 @@ void Level::update(double dt) {
 }
 
 void Level::render(ShaderProgram *shader) {
-	shader->setRenderOrigin(0, 0, 0);
+	shader->setRenderOrigin(0, 0);
 	for (auto & chunk : chunks) {
 		for (GameObject* object : chunk) {
 			object->render(shader);

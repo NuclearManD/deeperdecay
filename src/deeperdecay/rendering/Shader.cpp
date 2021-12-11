@@ -112,18 +112,18 @@ void ShaderProgram::setTextureSelected(Texture& texture) {
     glUniform1i(textureUniform, 0);
 }
 
-void ShaderProgram::setMeshPosition(float x, float y, float z) {
+void ShaderProgram::setMeshPosition(float x, float y, float z) const {
 	glUniform3f(positionUniform, x, y, z);
 }
 
-void ShaderProgram::setWindowScale(float scale) {
-	glUniform1f(windowScaleUniform, 1/scale);
+void ShaderProgram::setWindowScale(float sx, float sy) const {
+	glUniform2f(windowScaleUniform, 1/sx, 1/sy);
 }
 
-void ShaderProgram::setMeshScale(float x, float y, float z) {
+void ShaderProgram::setMeshScale(float x, float y, float z) const {
 	glUniform3f(scaleUniform, x, y, z);
 }
 
-void ShaderProgram::setRenderOrigin(float x, float y, float z) {
-	glUniform3f(originUniform, x, y, z);
+void ShaderProgram::setRenderOrigin(float x, float y) const {
+	glUniform2f(originUniform, x, y);
 }

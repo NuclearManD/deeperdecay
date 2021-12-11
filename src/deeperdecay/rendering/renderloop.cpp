@@ -22,7 +22,7 @@ bool renderLoop(render_conf_t* renderConf) {
 
         // Render our level
         shader->enable();
-        shader->setWindowScale(10);
+        window.updateScales(shader);
 		universe.render(shader);
         shader->disable();
 

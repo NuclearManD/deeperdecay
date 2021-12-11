@@ -41,10 +41,10 @@ public:
     GLuint getUniformId(const char *string);
 
     void setTextureSelected(Texture &texture);
-    void setMeshPosition(float x, float y, float z);
-    void setMeshScale(float x, float y, float z);
-	void setRenderOrigin(float x, float y, float z);
-	void setWindowScale(float scale);
+    void setMeshPosition(float x, float y, float z) const;
+    void setMeshScale(float x, float y, float z) const;
+	void setRenderOrigin(float x, float y) const;
+	void setWindowScale(float xs, float ys) const;
 
 private:
     GLuint programId;

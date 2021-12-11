@@ -7,11 +7,13 @@ out vec2 texturePos;
 
 uniform vec3 meshScale;
 uniform vec3 meshPosition;
-uniform vec3 origin;
-uniform float windowScale;
+uniform vec2 origin;
+uniform vec2 windowScale;
 
-void main(){
-    gl_Position.xyz = (vertexPosition * meshScale + meshPosition - origin) * windowScale;
+void main() {
+    vec3 worldPos = vertexPosition * meshScale + meshPosition;
+    gl_Position.xy = (worldPos.xy - origin) * windowScale;
+    gl_Position.z = worldPos.z;
     gl_Position.w = 1.0;
 
     texturePos = texturePosIn;

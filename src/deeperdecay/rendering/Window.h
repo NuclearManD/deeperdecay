@@ -7,6 +7,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "Shader.h"
 
 
 class Window {
@@ -30,9 +31,15 @@ public:
     }
 
     int getKey(int i);
-    
+
+	void updateScales(ShaderProgram *pProgram);
+
+	void setWorldScale(float scale) { worldScale = scale; }
+
 private:
     GLFWwindow *window;
+
+    float worldScale = 16;
 };
 
 

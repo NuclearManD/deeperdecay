@@ -11,7 +11,7 @@ uniform sampler2D textureId;
 
 void main(){
     // Output color = color of the texture at the specified position
-    color = texture(textureId, texturePos).rgba;
+    color = texture(textureId, texturePos);
     if(color.a < 0.05)
         discard;
 }

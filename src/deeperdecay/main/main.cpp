@@ -32,7 +32,6 @@ int main() {
 
     Level level0;
     Player player(window);
-    level0.addGameObject(vec2d(0, 0), *instantiateObjectById("beaker_100ml"));
     level0.addGameObject(vec2d(0, 0), player);
 
 	DynamicObjectDefinition* floorTileDefinition = getObjectDefinitionById("floortile0");
@@ -40,6 +39,8 @@ int main() {
     	for (int y = 0; y < 10; y++) {
 			level0.addGameObject(vec2d(x, y), *floorTileDefinition->instantiate());
 		}
+
+	level0.addGameObject(vec2d(0, 0), *instantiateObjectById("beaker_100ml"));
 
     RenderState renderState(window);
     render_conf_t renderConf = {

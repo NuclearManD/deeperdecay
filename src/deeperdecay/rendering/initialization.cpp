@@ -32,12 +32,10 @@ int graphicsSystemPreinit() {
     // We don't want the old OpenGL
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // Enable alpha blending
-	glEnable(GL_BLEND);
-
-	// Configure depth buffer to configure render order
+    // Configure OpenGL
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     return 0;
 }
