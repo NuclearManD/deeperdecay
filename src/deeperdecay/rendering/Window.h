@@ -29,6 +29,8 @@ public:
         return glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS;
     }
 
+    int getKey(int i);
+    
 private:
     GLFWwindow *window;
 };

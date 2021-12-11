@@ -35,5 +35,6 @@ build/
 cmake-build-debug/
 .idea/
 .vs
+.vscode/
 lib/
 CMakeSettings.json
