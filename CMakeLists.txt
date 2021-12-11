@@ -35,7 +35,7 @@ set(ALL_LIBS
         GLEW_1130
         )
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(deeperdecay
 		src/deeperdecay/main/main.cpp
@@ -71,10 +71,10 @@ if (WIN32)
     target_link_libraries(deeperdecay PRIVATE
             ${OPENGL_LIBRARY} # filled by "find_package(OpenGL REQUIRED)"
             ${GLFW_LIBRARY}
-            ${GLEW_LIBRARY} OpenGL::GL glfw3 glew32 glut)
+            ${GLEW_LIBRARY} OpenGL::GL glfw3 glew32 glut stdc++fs)
 else ()
     target_link_libraries(deeperdecay PRIVATE
         ${OPENGL_LIBRARY} # filled by "find_package(OpenGL REQUIRED)"
         ${GLFW_LIBRARY}
-        ${GLEW_LIBRARY} OpenGL::GL glfw GLEW::GLEW GLUT::GLUT)
+        ${GLEW_LIBRARY} OpenGL::GL glfw GLEW::GLEW GLUT::GLUT stdc++fs)
 endif()

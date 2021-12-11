@@ -35,6 +35,10 @@ int graphicsSystemPreinit() {
     // Enable alpha blending
 	glEnable(GL_BLEND);
 
+	// Configure depth buffer to configure render order
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+
     return 0;
 }
 
