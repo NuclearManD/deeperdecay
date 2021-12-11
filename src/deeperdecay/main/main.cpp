@@ -47,7 +47,8 @@ int main() {
             window,
             shader,
             renderState,
-			level0
+			level0,
+			player
     };
 
     renderLoop(&renderConf);

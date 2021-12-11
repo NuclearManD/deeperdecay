@@ -11,6 +11,7 @@
 bool renderLoop(render_conf_t* renderConf) {
     RenderState& state = renderConf->renderState;
     Window& window = renderConf->window;
+    Player& player = renderConf->player;
     ShaderProgram* shader = renderConf->shader;
     auto& universe = renderConf->universe;
 
@@ -23,7 +24,7 @@ bool renderLoop(render_conf_t* renderConf) {
         // Render our level
         shader->enable();
         window.updateScales(shader);
-		universe.render(shader);
+		player.renderWorld(shader);
         shader->disable();
 
         // Swap buffers

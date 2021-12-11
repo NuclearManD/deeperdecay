@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 
 #include "deeperdecay/rendering/primitives.h"
+#include "deeperdecay/framework/Level.h"
 
 
 #define SPEED 5
@@ -35,4 +36,9 @@ void Player::update(double dt) {
 	if (window.getKey( GLFW_KEY_LEFT ) == GLFW_PRESS){
 		position.xy[0] -= dt * SPEED;
 	}
+}
+
+void Player::renderWorld(ShaderProgram *shader) {
+	shader->setRenderOrigin(position.xy[0], position.xy[1]);
+	position.level->render(shader);
 }

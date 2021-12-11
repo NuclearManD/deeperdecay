@@ -20,6 +20,8 @@ public:
 
 	void update(double dt) override;
 
+	void renderWorld(ShaderProgram *shader);
+
 private:
 	Window& window;
 	Texture* texture;
