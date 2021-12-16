@@ -14,6 +14,7 @@
 ** initialization.cpp
 */
 int graphicsSystemPreinit();
+int graphicsSystemInit();
 ShaderProgram* loadShader();
 
 /*

@@ -10,34 +10,41 @@
 
 
 int graphicsSystemPreinit() {
-    // Needed for core profile (what does this do exactly????)
-    glewExperimental = true;
+	// Needed for core profile (what does this do exactly????)
+	glewExperimental = true;
 
-    // Initialise GLFW, so we can easily create windows and manage OpenGL
-    if (!glfwInit()) {
-        fprintf(stderr, "Failed to initialize GLFW\n");
-        return -1;
-    }
+	// Initialise GLFW, so we can easily create windows and manage OpenGL
+	if (!glfwInit()) {
+		fprintf(stderr, "Failed to initialize GLFW\n");
+		return -1;
+	}
 
-    // 4x antialiasing, so our stuff looks prettier
-    glfwWindowHint(GLFW_SAMPLES, 4);
+	// 4x antialiasing, so our stuff looks prettier
+	glfwWindowHint(GLFW_SAMPLES, 4);
 
-    // We want OpenGL 3.3 (GL33 in LWJGL)
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	// We want OpenGL 3.3 (GL33 in LWJGL)
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
-    // To make MacOS happy; should not be needed
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	// To make MacOS happy; should not be needed
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    // We don't want the old OpenGL
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	// We don't want the old OpenGL
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // Configure OpenGL
+	return 0;
+}
+
+
+int graphicsSystemInit() {
+
+	// Configure OpenGL
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    return 0;
+	return 0;
 }
 
 ShaderProgram* loadShader() {

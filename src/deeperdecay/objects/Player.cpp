@@ -9,11 +9,11 @@
 #include "deeperdecay/framework/Level.h"
 
 
-#define SPEED 5
+#define SPEED 50
 
 
 void Player::render(ShaderProgram* shader) {
-	shader->setMeshPosition(position.xy[0], position.xy[1], 0);
+	shader->setMeshPosition(position.xy[0], position.xy[1], 1);
 	shader->setMeshScale(1, 1, 1);
 	shader->setTextureSelected(*texture);
 	drawSquare();

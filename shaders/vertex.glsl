@@ -13,7 +13,9 @@ uniform vec2 windowScale;
 void main() {
     vec3 worldPos = vertexPosition * meshScale + meshPosition;
     gl_Position.xy = (worldPos.xy - origin) * windowScale;
-    gl_Position.z = worldPos.z;
+    // We negatate this so that z values 1 and above are not discarded.  This also means that
+    // the depth test operator is inverted (Would be GL_GREATER if not for this change)
+    gl_Position.z = -worldPos.z;
     gl_Position.w = 1.0;
 
     texturePos = texturePosIn;

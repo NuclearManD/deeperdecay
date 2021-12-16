@@ -1,14 +1,12 @@
-#include <iostream>
+
 #include <deeperdecay/rendering/Window.h>
 #include <deeperdecay/framework/Level.h>
-#include <deeperdecay/objects/TestObject.h>
 #include <deeperdecay/objects/Player.h>
 #include <deeperdecay/loader/objectRegistry.h>
 
 #include "deeperdecay/util/logging.h"
 #include "deeperdecay/rendering/rendering.h"
 #include "deeperdecay/rendering/Shader.h"
-#include "deeperdecay/rendering/textures/Texture.h"
 
 
 int main() {
@@ -16,11 +14,17 @@ int main() {
         log_critical("Failed graphics system preinit");
         return -1;
     }
+
     Window window;
     if (!window) {
         log_critical("Failed to open window");
         return -1;
     }
+
+	if (graphicsSystemInit() < 0) {
+		log_critical("Failed graphics system init");
+		return -1;
+	}
 
     ShaderProgram* shader = loadShader();
     if (shader == nullptr) {
